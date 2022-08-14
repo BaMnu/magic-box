@@ -26,16 +26,22 @@ public class MagicBox<T> {
 
     private T pick() throws RuntimeException {
         int count = 0;
-        int randomIndex = 0;
-        for (T element : items)
+        for (T element : items) {
             if (element == null) {
                 count++;
-            throw new RuntimeException("The Magic Box is not filled with enough amount of items."
-                    + "\nYou can fill: " + count + " item(s) "
-                    + "in your " + "'" + name + "'");
+            }
+        }
+
+        int randomIndex = 0;
+        for (T cell : items) {
+            if (cell == null) {
+                throw new RuntimeException("\nThe Magic Box " + name + " hasn't been filled with enough amount of items."
+                        + "\nYou should add: " + count + " item(s) in your " + name + " to see the result."
+                        + "\nPlease fill in each cell in your box(es) & try again.");
             } else {
-            Random random = new Random();
-            randomIndex = random.nextInt(size);
+                Random random = new Random();
+                randomIndex = random.nextInt(size);
+            }
         }
         return items[randomIndex];
     }
