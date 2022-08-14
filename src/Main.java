@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        MagicBox<Integer> integerBox = new MagicBox<>("'Magic Box for Numbers'", new Integer[3]);
-        MagicBox<String> stringBox = new MagicBox<>("'Magic Box for Words'", new String[3]);
+        MagicBox<Integer> integerBox = new MagicBox<>("'Magic Box for Numbers'", 3);
+        MagicBox<String> stringBox = new MagicBox<>("'Magic Box for Words'", 3);
 
         integerBox.add(1);
         integerBox.add(2);

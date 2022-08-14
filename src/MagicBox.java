@@ -2,40 +2,40 @@ import java.util.Random;
 
 public class MagicBox<T> {
 
-    protected String name;
-    protected T[] items;
-    private T item;
+    private final String name;
+    private final int size;
+    private final T[] items;
 
-    public MagicBox(String name, T[] items) {
+    protected MagicBox(String name, int size) {
         this.name = name;
-        this.items = items;
+        this.size = size;
+        items = (T[]) new Object[size];
     }
 
-    public boolean add(T item) {
+    protected boolean add(T item) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = item;
                 return true;
             }
         }
+        System.out.println("The item [" + item + "] hasn't been added in your " + name + "." +
+                " You can't fill this Magic Box more than " + size + " cells!");
         return false;
     }
 
     private T pick() throws RuntimeException {
         int count = 0;
+        int randomIndex = 0;
         for (T element : items)
             if (element == null) {
                 count++;
-            }
-
-        int randomIndex;
-        if (add(item)) {
-            System.out.println("The Magic Box is not filled with enough amount of items."
+            throw new RuntimeException("The Magic Box is not filled with enough amount of items."
                     + "\nYou can fill: " + count + " item(s) "
                     + "in your " + "'" + name + "'");
-            throw new RuntimeException();
-        } else {
-            randomIndex = new Random().nextInt(items.length);
+            } else {
+            Random random = new Random();
+            randomIndex = random.nextInt(size);
         }
         return items[randomIndex];
     }
